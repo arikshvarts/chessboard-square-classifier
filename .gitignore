@@ -1,0 +1,19 @@
+# data
+data/
+dataset_out/
+checkpoints/
+outputs/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# notebooks
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
