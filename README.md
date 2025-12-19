@@ -26,7 +26,7 @@ Pipeline to convert labeled chess video frames into per-square training data and
 
 Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp --image <frame> --out_warp <out.png> --out_debug <debug.png>`.
 
-## Additional datasets (optional)
+## Additional datasets - optiona for enhancing training and making more robust
 - Lichess PGN/position dumps: https://database.lichess.org/
 - Kaggle Chess Piece Images dataset: [https://www.kaggle.com/datasets/koryakinp/chess-pieces-images](https://www.kaggle.com/datasets/koryakinp/chess-positions)
 - https://data.4tu.nl/datasets/99b5c721-280b-450b-b058-b2900b69a90f/2
