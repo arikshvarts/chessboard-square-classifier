@@ -2,6 +2,8 @@
 
 Pipeline to convert labeled chess video frames into per-square training data and evaluate predictions.
 
+![Sample debug grid](docs/assets/sample_debug_grid.png)
+
 ## Repo layout
 - `Data/` raw per-game folders (`gameX_per_frame/` with `tagged_images/` and `gameX.csv`).
 - `dataset_tools/` dataset factory, FEN utilities, debug visualizations, evaluation.
@@ -19,6 +21,11 @@ Pipeline to convert labeled chess video frames into per-square training data and
 - Optional: generate debug grids to verify orientation.
 
 Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp --image <frame> --out_warp <out.png> --out_debug <debug.png>`.
+
+## Additional datasets (optional)
+- Lichess PGN/position dumps: https://database.lichess.org/
+- Kaggle Chess Piece Images dataset: https://www.kaggle.com/datasets/koryakinp/chess-pieces-images
+- Kaggle Chess Positions (FEN) dataset: https://www.kaggle.com/datasets/ronakbadhe/chess-position-dataset
 
 ## Evaluation (later)
 - Compare predictions vs manifest: `python dataset_tools/eval.py --manifest dataset_out/dataset_manifest.csv --preds path/to/preds.csv`
