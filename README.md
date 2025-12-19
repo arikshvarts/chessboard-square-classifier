@@ -23,12 +23,9 @@ Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp
 ## Evaluation (later)
 - Compare predictions vs manifest: `python dataset_tools/eval.py --manifest dataset_out/dataset_manifest.csv --preds path/to/preds.csv`
 
-## Git workflow (suggested)
+## Git workflow
 - Create feature branches (`feature/dataset-pipeline`, `feature/model-training`).
 - Keep `master` runnable; use small, descriptive commits.
 - Do not commit large data (`Data/`, `dataset_out/`, `checkpoints/`, `outputs/`).
 
-## Next steps
-- Add dataset tools (`fen_utils.py`, `extract_squares.py`, `make_dataset.py`, `debug_grid.py`, `eval.py`).
-- Run dataset build and verify with debug grids.
-- Hand off manifest to model-training teammate.
+
