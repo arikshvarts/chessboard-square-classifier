@@ -13,10 +13,12 @@ Pipeline to convert labeled chess video frames into per-square training data and
 3. Install deps: `pip install -r requirements.txt`
 
 ## Dataset build (Phase 1)
-Once `dataset_tools/make_dataset.py` is added:
-- Generate manifest and class map (default 80/20 train/test row-wise, deterministic seed=42): `python -m dataset_tools.make_dataset --data_root Data --out_root dataset_out`
-- Customize split/seed if needed, e.g. `--train_ratio 0.75 --val_ratio 0.05 --seed 1234`
+- Default manifest + class map (80/20 row-wise, seed=42): `python -m dataset_tools.make_dataset --data_root Data --out_root dataset_out`
+- Adjust splits/seed: `--train_ratio 0.75 --val_ratio 0.05 --seed 1234`
+- Optional board detect + warp before the 8x8 grid: add `--detect_board --warp_size 800` (requires `opencv-python`).
 - Optional: generate debug grids to verify orientation.
+
+Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp --image <frame> --out_warp <out.png> --out_debug <debug.png>`.
 
 ## Evaluation (later)
 - Compare predictions vs manifest: `python dataset_tools/eval.py --manifest dataset_out/dataset_manifest.csv --preds path/to/preds.csv`
