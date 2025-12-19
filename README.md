@@ -28,8 +28,8 @@ Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp
 
 ## Additional datasets (optional)
 - Lichess PGN/position dumps: https://database.lichess.org/
-- Kaggle Chess Piece Images dataset: https://www.kaggle.com/datasets/koryakinp/chess-pieces-images
-- Kaggle Chess Positions (FEN) dataset: https://www.kaggle.com/datasets/ronakbadhe/chess-position-dataset
+- Kaggle Chess Piece Images dataset: [https://www.kaggle.com/datasets/koryakinp/chess-pieces-images](https://www.kaggle.com/datasets/koryakinp/chess-positions)
+- https://data.4tu.nl/datasets/99b5c721-280b-450b-b058-b2900b69a90f/2
 
 ## Evaluation (later)
 - Compare predictions vs manifest: `python dataset_tools/eval.py --manifest dataset_out/dataset_manifest.csv --preds path/to/preds.csv`
