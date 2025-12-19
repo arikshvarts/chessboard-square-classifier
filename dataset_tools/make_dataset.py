@@ -37,6 +37,8 @@ def build_manifest(
     val_ratio: float = 0.0,
     skip_missing: bool = True,
     seed: int = 42,
+    detect_board: bool = False,
+    warp_size: int = 800,
 ) -> pd.DataFrame:
     os.makedirs(out_root, exist_ok=True)
 
@@ -75,6 +77,26 @@ def build_manifest(
                     print(msg)
                     continue
                 raise FileNotFoundError(msg)
+
+            if detect_board:
+                try:
+                    from dataset_tools.board_detect_and_warp import process_image as warp_once
+                except ImportError as e:
+                    raise ImportError("OpenCV is required for --detect_board (pip install opencv-python)") from e
+
+                warp_dir = os.path.join(out_root, "warped", game_id)
+                os.makedirs(warp_dir, exist_ok=True)
+                stem, _ = os.path.splitext(os.path.basename(frame_path))
+                warped_path = os.path.join(warp_dir, f"{stem}_warp.png")
+                try:
+                    warp_once(frame_path, warped_path, out_debug=None, out_size=warp_size)
+                    frame_path = warped_path
+                except Exception as exc:
+                    msg = f"Board warp failed for frame_id={frame_id} in {game_id}: {exc}"
+                    if skip_missing:
+                        print(msg)
+                        continue
+                    raise
 
             for square_idx in range(64):
                 row = square_idx // 8
@@ -125,6 +147,8 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--train_ratio", type=float, default=0.8, help="Train split ratio (row-wise)")
     ap.add_argument("--val_ratio", type=float, default=0.0, help="Val split ratio (row-wise)")
     ap.add_argument("--seed", type=int, default=42, help="Random seed for shuffling")
+    ap.add_argument("--detect_board", action="store_true", help="Run board detection + warp before cropping grid")
+    ap.add_argument("--warp_size", type=int, default=800, help="Output size (pixels) for warped board when detected")
     ap.add_argument(
         "--skip_missing",
         action="store_true",
@@ -149,6 +173,8 @@ def main() -> None:
         args.val_ratio,
         skip_missing=args.skip_missing,
         seed=args.seed,
+        detect_board=args.detect_board,
+        warp_size=args.warp_size,
     )
 
 
