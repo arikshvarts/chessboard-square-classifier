@@ -35,8 +35,11 @@ Board detect helper (standalone): `python -m dataset_tools.board_detect_and_warp
 - Compare predictions vs manifest: `python dataset_tools/eval.py --manifest dataset_out/dataset_manifest.csv --preds path/to/preds.csv`
 
 ## Git workflow
-- Create feature branches (`feature/dataset-pipeline`, `feature/model-training`).
-- Keep `master` runnable; use small, descriptive commits.
-- Do not commit large data (`Data/`, `dataset_out/`, `checkpoints/`, `outputs/`).
+- Start: `git checkout -b feature/<task>`
+- Sync with base: `git checkout main` → `git pull` → `git checkout feature/<task>` → `git merge main`
+- Commit/push: `git add ...` → `git commit -m "..."` → `git push -u origin feature/<task>`
+- Open PR: base = `main`, compare = `feature/<task>`; request review; merge when green.
+- After merge: `git checkout main` → `git pull` → `git branch -d feature/<task>` → `git push origin --delete feature/<task>`
+- Keep data out of Git: `Data/`, `dataset_out/`, `checkpoints/`, `outputs/` stay in `.gitignore`.
 
 
