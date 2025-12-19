@@ -2,6 +2,10 @@
 
 Pipeline to convert labeled chess video frames into per-square training data and evaluate predictions.
 
+**Team**: Ariel Shvarts, Nikol Koifman
+
+**Context**: Course project (Intro to Deep Learning, Fall 2025) delivering a dataset factory, evaluation harness, and debug visuals for chessboard square classification.
+
 ![Sample debug grid](docs/assets/sample_debug_grid.png)
 
 ## Repo layout
