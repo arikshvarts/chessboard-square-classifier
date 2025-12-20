@@ -66,7 +66,7 @@ def test_single_square_extraction():
         return False
     
     img = Image.open(img_path).convert('RGB')
-    print(f"✓ Image loaded: {img.size}")
+    print(f" Image loaded: {img.size}")
     
     # Extract one square
     square_idx = int(sample_row['square_idx'])
@@ -78,7 +78,7 @@ def test_single_square_extraction():
     
     try:
         square_img = extract_single_square(img, square_idx)
-        print(f"✓ Square extracted: {square_img.size}")
+        print(f" Square extracted: {square_img.size}")
     except Exception as e:
         print(f" Error extracting square: {e}")
         import traceback
@@ -98,7 +98,7 @@ def test_single_square_extraction():
     
     plt.tight_layout()
     plt.savefig('test_single_square.png', dpi=150, bbox_inches='tight')
-    print("✓ Saved to test_single_square.png")
+    print("Saved to test_single_square.png")
     plt.close()
     
     return True
@@ -142,7 +142,7 @@ def test_all_squares_extraction():
         print(f"✓ Extracted {len(all_squares)} squares")
         
         if len(all_squares) != 64:
-            print(f"⚠ Warning: Expected 64 squares, got {len(all_squares)}")
+            print(f" Warning: Expected 64 squares, got {len(all_squares)}")
         
         # Check first square size
         print(f"  Each square size: {all_squares[0].size}")
@@ -316,9 +316,9 @@ def test_fen_reconstruction():
         print("\n✓ Saved board visualization to test_fen_board.svg")
         
     except ImportError:
-        print("\n⚠ Install python-chess to visualize: pip install python-chess")
+        print("\n Install python-chess to visualize: pip install python-chess")
     except Exception as e:
-        print(f"\n⚠ Could not create chess board: {e}")
+        print(f"\n Could not create chess board: {e}")
         print("   This might indicate a FEN format issue")
     
     return True
