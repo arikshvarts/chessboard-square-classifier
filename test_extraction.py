@@ -352,7 +352,7 @@ if __name__ == '__main__':
             print("  - test_fen_board.svg (if python-chess installed)")
             print("\nNext step: Review the images and proceed to create dataset.py")
         else:
-            print("\n⚠ Some tests failed - review errors above")
+            print("\n Some tests failed - review errors above")
         
     except Exception as e:
         print(f"\n UNEXPECTED ERROR: {e}")
