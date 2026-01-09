@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♟️ Chess Board Position Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>
+                <i class="fas fa-chess"></i>
+                Chess Board Position Classifier
+            </h1>
+            <p class="subtitle">Upload a chess board image to detect the position</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Upload Section -->
+            <div class="upload-section card">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3>Drop your chess board image here</h3>
+                    <p>or click to browse</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i> Choose File
+                    </button>
+                </div>
+                
+                <div id="imagePreview" class="image-preview hidden">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button class="btn btn-secondary" id="clearBtn">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing chess board...</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section hidden">
+                <div class="card">
+                    <h2><i class="fas fa-chess-board"></i> Detected Position</h2>
+                    
+                    <!-- Chess Board Visualization -->
+                    <div class="chess-board" id="chessBoard">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- FEN Notation -->
+                    <div class="fen-section">
+                        <h3><i class="fas fa-code"></i> FEN Notation</h3>
+                        <div class="fen-display" id="fenDisplay">
+                            <code id="fenText"></code>
+                            <button class="btn-icon" id="copyFenBtn" title="Copy FEN">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Confidence Heatmap -->
+                    <div class="confidence-section">
+                        <h3><i class="fas fa-chart-bar"></i> Confidence Analysis</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="avgConfidence">--</div>
+                                <div class="stat-label">Average Confidence</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="lowConfCount">--</div>
+                                <div class="stat-label">Low Confidence Squares</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="piecesCount">--</div>
+                                <div class="stat-label">Pieces Detected</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-success" id="downloadBtn">
+                            <i class="fas fa-download"></i> Download Results
+                        </button>
+                        <button class="btn btn-primary" id="newAnalysisBtn">
+                            <i class="fas fa-sync-alt"></i> New Analysis
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="errorSection" class="error-section hidden">
+                <div class="error-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error</h3>
+                    <p id="errorMessage"></p>
+                    <button class="btn btn-secondary" id="retryBtn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section card">
+            <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+            <ol>
+                <li><strong>Upload:</strong> Choose a clear image of a chess board</li>
+                <li><strong>Process:</strong> The AI will detect and classify each square</li>
+                <li><strong>Review:</strong> Check the predicted position and confidence scores</li>
+                <li><strong>Export:</strong> Download the FEN notation for use in chess software</li>
+            </ol>
+            
+            <div class="tips">
+                <h4><i class="fas fa-lightbulb"></i> Tips for Best Results</h4>
+                <ul>
+                    <li>Use a well-lit, clear image</li>
+                    <li>Ensure the entire board is visible</li>
+                    <li>Avoid shadows or glare on the board</li>
+                    <li>Square or slightly angled views work best</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>
+                <i class="fas fa-graduation-cap"></i> 
+                Intro to Deep Learning (Fall 2025) - Final Project<br>
+                <small>Ariel Shvarts & Nikol Koifman</small>
+            </p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

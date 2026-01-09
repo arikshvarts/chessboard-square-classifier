@@ -12,15 +12,17 @@ class ChessSquareClassifier(nn.Module):
         self.num_classes = num_classes
         self.model_name = model_name
         
-        # Load pretrained ResNet
+        # Load pretrained ResNet (using weights parameter for modern PyTorch)
+        weights = 'DEFAULT' if pretrained else None
+        
         if model_name == 'resnet18':
-            self.backbone = models.resnet18(pretrained=pretrained)
+            self.backbone = models.resnet18(weights=weights)
             in_features = 512
         elif model_name == 'resnet34':
-            self.backbone = models.resnet34(pretrained=pretrained)
+            self.backbone = models.resnet34(weights=weights)
             in_features = 512
         elif model_name == 'resnet50':
-            self.backbone = models.resnet50(pretrained=pretrained)
+            self.backbone = models.resnet50(weights=weights)
             in_features = 2048
         else:
             raise ValueError(f"Unknown model: {model_name}")
