@@ -32,13 +32,14 @@ TRANSFORM = None
 
 
 def load_class_map():
-    """Load the class mapping from classes.json"""
+    """Load the class mapping from classes.json (internal encoding)"""
     classes_path = os.path.join('dataset_out', 'classes.json')
     if os.path.exists(classes_path):
         with open(classes_path, 'r') as f:
             return json.load(f)
     else:
-        # Default class map matching fen_utils.py
+        # Default class map matching fen_utils.py (INTERNAL encoding)
+        # 0=empty, 1-6=white pieces, 7-12=black pieces
         return {
             "0": "empty", "1": "P", "2": "N", "3": "B", "4": "R", 
             "5": "Q", "6": "K", "7": "p", "8": "n", "9": "b", 
@@ -47,7 +48,7 @@ def load_class_map():
 
 
 def initialize_model():
-    """Initialize the model for predictions"""
+    """Initialize the model for predictions (uses internal encoding)"""
     global MODEL, DEVICE, CLASS_MAP, TRANSFORM
     
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

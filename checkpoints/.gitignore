@@ -1,0 +1,5 @@
+# Keep this directory in git but not the model files
+*.pth
+*.pt
+*.ckpt
+!.gitkeep

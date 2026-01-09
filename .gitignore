@@ -1,8 +1,15 @@
 # data
 data/
+Data/
 dataset_out/
-checkpoints/
+compliant_dataset/
 outputs/
+*.zip
+
+# models (too large for git)
+checkpoints/*.pth
+checkpoints/*.pt
+checkpoints/*/*.pth
 
 # python
 __pycache__/
