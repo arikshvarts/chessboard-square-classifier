@@ -1,12 +1,12 @@
-# 📊 Complete Adaptation Summary
+# Complete Adaptation Summary
 
 ## What Was Changed and Why
 
 ---
 
-## 🎯 Main Changes
+## Main Changes
 
-### 1. ⭐ Created `evaluate.py` - Official Evaluation API
+### 1. Created `evaluate.py` - Official Evaluation API
 
 **File**: `evaluate.py`
 
@@ -64,15 +64,15 @@ python app.py
 
 ---
 
-### 3. 🔄 Created `create_compliant_dataset.py` - Dataset Converter
+### 3. Created `create_compliant_dataset.py` - Dataset Converter
 
 **File**: `create_compliant_dataset.py`
 
 **Why**: Course requires specific dataset format:
 ```
 dataset_root/
-├── images/          # All board images
-└── gt.csv           # 3 columns: image_name, fen, view
+├── images/ # All board images
+└── gt.csv # 3 columns: image_name, fen, view
 ```
 
 **What it does**:
@@ -93,7 +93,7 @@ python create_compliant_dataset.py --output compliant_dataset --verify
 
 ---
 
-### 4. 📁 Created `checkpoints/` Folder
+### 4. Created `checkpoints/` Folder
 
 **Location**: `checkpoints/`
 
@@ -102,17 +102,17 @@ python create_compliant_dataset.py --output compliant_dataset --verify
 **Structure**:
 ```
 checkpoints/
-├── best_model.pth          # Your best model (place here)
-├── README.md               # Instructions
-├── .gitignore              # Don't commit .pth files
-└── fold_*/                 # (Optional) Individual folds
+├── best_model.pth # Your best model (place here)
+├── README.md # Instructions
+├── .gitignore # Don't commit .pth files
+└── fold_*/ # (Optional) Individual folds
 ```
 
 **Instructions**: See [MODEL_TRANSFER_GUIDE.md](MODEL_TRANSFER_GUIDE.md)
 
 ---
 
-### 5. 📚 Updated `README.md` - Complete Documentation
+### 5. Updated `README.md` - Complete Documentation
 
 **File**: `README.md`
 
@@ -125,12 +125,12 @@ checkpoints/
 - Dataset format specification
 - Requirements and troubleshooting
 
-**Before**: Basic setup only  
+**Before**: Basic setup only
 **After**: Complete end-to-end documentation
 
 ---
 
-### 6. 📝 Created Documentation Files
+### 6. Created Documentation Files
 
 **New files**:
 
@@ -148,9 +148,9 @@ checkpoints/
 **Internal Encoding** (Your model trains with this):
 ```python
 PIECE_TO_ID = {
-    'empty': 0,
-    'P': 1, 'N': 2, 'B': 3, 'R': 4, 'Q': 5, 'K': 6,  # White
-    'p': 7, 'n': 8, 'b': 9, 'r': 10, 'q': 11, 'k': 12  # Black
+ 'empty': 0,
+ 'P': 1, 'N': 2, 'B': 3, 'R': 4, 'Q': 5, 'K': 6, # White
+ 'p': 7, 'n': 8, 'b': 9, 'r': 10, 'q': 11, 'k': 12 # Black
 }
 ```
 - Defined in: `dataset_tools/fen_utils.py`
@@ -160,10 +160,10 @@ PIECE_TO_ID = {
 **Official Spec Encoding** (What course requires):
 ```python
 SPEC_ENCODING = {
-    'P': 0, 'R': 1, 'N': 2, 'B': 3, 'Q': 4, 'K': 5,    # White: 0-5
-    'p': 6, 'r': 7, 'n': 8, 'b': 9, 'q': 10, 'k': 11,  # Black: 6-11
-    'empty': 12,                                        # Empty: 12
-    'OOD': 13                                           # Unknown: 13
+ 'P': 0, 'R': 1, 'N': 2, 'B': 3, 'Q': 4, 'K': 5, # White: 0-5
+ 'p': 6, 'r': 7, 'n': 8, 'b': 9, 'q': 10, 'k': 11, # Black: 6-11
+ 'empty': 12, # Empty: 12
+ 'OOD': 13 # Unknown: 13
 }
 ```
 - Defined in: `evaluate.py`
@@ -173,19 +173,19 @@ SPEC_ENCODING = {
 **Conversion Mapping** (in evaluate.py):
 ```python
 INTERNAL_TO_SPEC = {
-    0: 12,   # empty -> 12
-    1: 0,    # P -> 0
-    2: 2,    # N -> 2
-    3: 3,    # B -> 3
-    4: 1,    # R -> 1
-    5: 4,    # Q -> 4
-    6: 5,    # K -> 5
-    7: 6,    # p -> 6
-    8: 8,    # n -> 8
-    9: 9,    # b -> 9
-    10: 7,   # r -> 7
-    11: 10,  # q -> 10
-    12: 11,  # k -> 11
+ 0: 12, # empty -> 12
+ 1: 0, # P -> 0
+ 2: 2, # N -> 2
+ 3: 3, # B -> 3
+ 4: 1, # R -> 1
+ 5: 4, # Q -> 4
+ 6: 5, # K -> 5
+ 7: 6, # p -> 6
+ 8: 8, # n -> 8
+ 9: 9, # b -> 9
+ 10: 7, # r -> 7
+ 11: 10, # q -> 10
+ 12: 11, # k -> 11
 }
 ```
 
@@ -197,49 +197,49 @@ INTERNAL_TO_SPEC = {
 
 ### These files are unchanged and work perfectly:
 
-- ✅ `src/model.py` - Model architecture
-- ✅ `src/train.py` - Training script
-- ✅ `src/predict.py` - Prediction utilities
-- ✅ `src/dataset.py` - Dataset classes
-- ✅ `dataset_tools/fen_utils.py` - FEN utilities (keep PIECE_TO_ID as is!)
-- ✅ `dataset_tools/extract_squares.py` - Square extraction
-- ✅ `dataset_tools/make_dataset.py` - Dataset factory
-- ✅ `changed.ipynb` - Colab training notebook (already fixed earlier)
-- ✅ `templates/index.html` - Web app HTML
-- ✅ `static/css/style.css` - Web app CSS
-- ✅ `static/js/app.js` - Web app JavaScript
+- `src/model.py` - Model architecture
+- `src/train.py` - Training script
+- `src/predict.py` - Prediction utilities
+- `src/dataset.py` - Dataset classes
+- `dataset_tools/fen_utils.py` - FEN utilities (keep PIECE_TO_ID as is!)
+- `dataset_tools/extract_squares.py` - Square extraction
+- `dataset_tools/make_dataset.py` - Dataset factory
+- `changed.ipynb` - Colab training notebook (already fixed earlier)
+- `templates/index.html` - Web app HTML
+- `static/css/style.css` - Web app CSS
+- `static/js/app.js` - Web app JavaScript
 
 ---
 
-## 📋 File Locations Quick Reference
+## File Locations Quick Reference
 
 ```
 Your Project/
 │
-├── evaluate.py                      # ⭐ NEW - Official API
-├── app.py                           # ✏️ UPDATED - Web app (minor comments)
-├── create_compliant_dataset.py      # ⭐ NEW - Dataset converter
-├── SUBMISSION_CHECKLIST.md          # ⭐ NEW - Submission guide
-├── QUICK_REFERENCE.md               # ⭐ NEW - This file
-├── MODEL_TRANSFER_GUIDE.md          # ⭐ NEW - Colab→Local guide
-├── README.md                        # ✏️ UPDATED - Complete docs
+├── evaluate.py # NEW - Official API
+├── app.py # ✏️ UPDATED - Web app (minor comments)
+├── create_compliant_dataset.py # NEW - Dataset converter
+├── SUBMISSION_CHECKLIST.md # NEW - Submission guide
+├── QUICK_REFERENCE.md # NEW - This file
+├── MODEL_TRANSFER_GUIDE.md # NEW - Colab→Local guide
+├── README.md # ✏️ UPDATED - Complete docs
 │
-├── checkpoints/                     # ⭐ NEW - Model storage
-│   ├── README.md                    # How to place models
-│   ├── .gitignore                   # Don't commit .pth
-│   └── best_model.pth               # ← PUT YOUR TRAINED MODEL HERE
+├── checkpoints/ # NEW - Model storage
+│ ├── README.md # How to place models
+│ ├── .gitignore # Don't commit .pth
+│ └── best_model.pth # ← PUT YOUR TRAINED MODEL HERE
 │
-├── src/                             # ✅ UNCHANGED
-├── dataset_tools/                   # ✅ UNCHANGED
-├── templates/                       # ✅ UNCHANGED
-├── static/                          # ✅ UNCHANGED
-├── changed.ipynb                    # ✅ ALREADY FIXED (earlier)
-└── requirements.txt                 # ✅ UNCHANGED
+├── src/ # UNCHANGED
+├── dataset_tools/ # UNCHANGED
+├── templates/ # UNCHANGED
+├── static/ # UNCHANGED
+├── changed.ipynb # ALREADY FIXED (earlier)
+└── requirements.txt # UNCHANGED
 ```
 
 ---
 
-## ✅ What Works Right Now
+## What Works Right Now
 
 ### 1. Web App for Visualization
 ```bash
@@ -279,73 +279,73 @@ python evaluate.py --image chessboard.jpg
 
 ---
 
-## ⚠️ What You Still Need to Do
+## What You Still Need to Do
 
 ### Immediate (This Week):
 
 1. **Train model in Google Colab**
-   - Upload `changed.ipynb` to Colab
-   - Upload `code.zip` and `all_games_data.zip`
-   - Run all cells
-   - Wait 2-3 hours
+ - Upload `changed.ipynb` to Colab
+ - Upload `code.zip` and `all_games_data.zip`
+ - Run all cells
+ - Wait 2-3 hours
 
 2. **Download trained model**
-   - From Colab: `files.download('dataset_out/best_model_fold_X.pth')`
-   - Or from Google Drive: `MyDrive/chess_models/`
-   - Place at: `checkpoints/best_model.pth`
+ - From Colab: `files.download('dataset_out/best_model_fold_X.pth')`
+ - Or from Google Drive: `MyDrive/chess_models/`
+ - Place at: `checkpoints/best_model.pth`
 
 3. **Test evaluation API**
-   ```bash
-   python evaluate.py --image test.jpg
-   ```
+ ```bash
+ python evaluate.py --image test.jpg
+ ```
 
 4. **Convert dataset**
-   ```bash
-   python create_compliant_dataset.py --input Data --output compliant_dataset
-   ```
+ ```bash
+ python create_compliant_dataset.py --input Data --output compliant_dataset
+ ```
 
 5. **Upload dataset to drive**
-   - Upload `compliant_dataset/` to Google Drive
-   - Get shareable link
-   - Include in report
+ - Upload `compliant_dataset/` to Google Drive
+ - Get shareable link
+ - Include in report
 
 ### Before Presentation (Jan 20-21):
 
 6. **Write final report** (up to 20 pages)
-   - Must include ablation study!
-   - Use scientific paper format
-   - See SUBMISSION_CHECKLIST.md
+ - Must include ablation study!
+ - Use scientific paper format
+ - See SUBMISSION_CHECKLIST.md
 
 7. **Prepare presentation** (7-10 minutes)
-   - Slides (not text-heavy)
-   - Visual results
-   - Ablation study results
-   - Practice timing!
+ - Slides (not text-heavy)
+ - Visual results
+ - Ablation study results
+ - Practice timing!
 
 8. **(Optional) Create project webpage**
-   - GitHub Pages
-   - Visual results
-   - Demo
+ - GitHub Pages
+ - Visual results
+ - Demo
 
 ### Before Final Deadline (Jan 24):
 
 9. **Final submission**
-   - GitHub repo URL
-   - Dataset share link
-   - Models share link
-   - Final report PDF
+ - GitHub repo URL
+ - Dataset share link
+ - Models share link
+ - Final report PDF
 
 ---
 
-## 🚀 Quick Start Commands
+## Quick Start Commands
 
 ```bash
 # Setup
 git clone <your-repo>
 cd chessboard-square-classifier
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1  # Windows
-source .venv/bin/activate      # Linux/Mac
+.\.venv\Scripts\Activate.ps1 # Windows
+source .venv/bin/activate # Linux/Mac
 pip install -r requirements.txt
 
 # Extract data
@@ -363,30 +363,30 @@ python app.py
 
 ---
 
-## 🎓 Key Points for Class Presentation
+## Key Points for Class Presentation
 
 ### What Makes Your Solution Special:
 
 1. **7-Fold Cross-Validation**
-   - Train on 6 games, test on 1
-   - Tests cross-game generalization
-   - Shows consistency across different conditions
+ - Train on 6 games, test on 1
+ - Tests cross-game generalization
+ - Shows consistency across different conditions
 
 2. **Dual Encoding System**
-   - Internal encoding for training efficiency
-   - Spec encoding for evaluation compliance
-   - Automatic conversion (no manual work)
+ - Internal encoding for training efficiency
+ - Spec encoding for evaluation compliance
+ - Automatic conversion (no manual work)
 
 3. **Complete Pipeline**
-   - Board detection
-   - Square extraction
-   - Per-square classification
-   - FEN reconstruction
+ - Board detection
+ - Square extraction
+ - Per-square classification
+ - FEN reconstruction
 
 4. **Interactive Demo**
-   - Web app for visualization
-   - Real-time predictions
-   - Confidence analysis
+ - Web app for visualization
+ - Real-time predictions
+ - Confidence analysis
 
 ### Ablation Study Ideas:
 
@@ -400,18 +400,18 @@ python app.py
 
 ## 💡 Pro Tips
 
-- ✅ **Test in fresh environment** before submitting
-- ✅ **Include visual examples** in presentation
-- ✅ **Document what didn't work** (viewed positively!)
-- ✅ **Practice presentation timing**
-- ✅ **Upload large files early** (takes time)
-- ✅ **Keep slides visual** (not text-heavy)
-- ✅ **Show web app demo** in presentation
-- ✅ **Explain encoding system** if asked
+- **Test in fresh environment** before submitting
+- **Include visual examples** in presentation
+- **Document what didn't work** (viewed positively!)
+- **Practice presentation timing**
+- **Upload large files early** (takes time)
+- **Keep slides visual** (not text-heavy)
+- **Show web app demo** in presentation
+- **Explain encoding system** if asked
 
 ---
 
-## 📞 Help Resources
+## Help Resources
 
 - **QUICK_REFERENCE.md** - This file
 - **README.md** - Complete documentation
@@ -421,20 +421,20 @@ python app.py
 
 ---
 
-## ✨ Summary
+## Summary
 
 **You now have**:
-- ✅ Official evaluation API (`evaluate.py`)
-- ✅ Compliant dataset converter
-- ✅ Complete documentation
-- ✅ Submission checklist
-- ✅ Working web app
-- ✅ Training notebook for Colab
+- Official evaluation API (`evaluate.py`)
+- Compliant dataset converter
+- Complete documentation
+- Submission checklist
+- Working web app
+- Training notebook for Colab
 
 **All code is adapted to course requirements!**
 
-**Next step**: Train in Colab and get your models! 🚀
+**Next step**: Train in Colab and get your models!
 
 ---
 
-**Good luck with your project!** 🎓
+**Good luck with your project!**

@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 What I Changed
+## What I Changed
 
 ### 1. **Created evaluate.py** - Official Evaluation API
 **Location**: `evaluate.py` (root directory)
@@ -81,16 +81,16 @@ python create_compliant_dataset.py --output compliant_dataset --verify
 
 ---
 
-## 🎓 Class Encodings Explained
+## Class Encodings Explained
 
 ### Official Spec Encoding (What evaluate.py Returns)
 ```python
-0: White Pawn    | 6: Black Pawn
-1: White Rook    | 7: Black Rook
-2: White Knight  | 8: Black Knight
-3: White Bishop  | 9: Black Bishop
-4: White Queen   | 10: Black Queen
-5: White King    | 11: Black King
+0: White Pawn | 6: Black Pawn
+1: White Rook | 7: Black Rook
+2: White Knight | 8: Black Knight
+3: White Bishop | 9: Black Bishop
+4: White Queen | 10: Black Queen
+5: White King | 11: Black King
 12: Empty Square
 13: OOD/Unknown
 ```
@@ -98,105 +98,105 @@ python create_compliant_dataset.py --output compliant_dataset --verify
 ### Internal Model Encoding (What Your Model Outputs)
 ```python
 0: Empty
-1: P (White Pawn)    | 7: p (Black Pawn)
-2: N (White Knight)  | 8: n (Black Knight)
-3: B (White Bishop)  | 9: b (Black Bishop)
-4: R (White Rook)    | 10: r (Black Rook)
-5: Q (White Queen)   | 11: q (Black Queen)
-6: K (White King)    | 12: k (Black King)
+1: P (White Pawn) | 7: p (Black Pawn)
+2: N (White Knight) | 8: n (Black Knight)
+3: B (White Bishop) | 9: b (Black Bishop)
+4: R (White Rook) | 10: r (Black Rook)
+5: Q (White Queen) | 11: q (Black Queen)
+6: K (White King) | 12: k (Black King)
 ```
 
 **Important**: `evaluate.py` handles the conversion automatically! Your model still uses internal encoding (0=empty), but `predict_board()` returns spec encoding (12=empty).
 
 ---
 
-## 🚀 Workflow Summary
+## Workflow Summary
 
 ### For Training (Google Colab)
 
 1. **Upload changed.ipynb to Colab**
 
 2. **Create code.zip**:
-   ```bash
-   zip -r code.zip src/ dataset_tools/
-   ```
+ ```bash
+ zip -r code.zip src/ dataset_tools/
+ ```
 
 3. **Run cells 1-9 in notebook**:
-   - Cell 1-5: Setup
-   - Cell 6: Prepare 7-fold splits
-   - Cell 7: Train (2-3 hours)
-   - Cell 8: Visualize results
-   - Cell 9: Save to Google Drive
+ - Cell 1-5: Setup
+ - Cell 6: Prepare 7-fold splits
+ - Cell 7: Train (2-3 hours)
+ - Cell 8: Visualize results
+ - Cell 9: Save to Google Drive
 
 4. **Download models**:
-   ```python
-   # In Colab
-   from google.colab import files
-   files.download('dataset_out/best_model_fold_1.pth')
-   ```
+ ```python
+ # In Colab
+ from google.colab import files
+ files.download('dataset_out/best_model_fold_1.pth')
+ ```
 
 5. **Place locally**:
-   - Copy to `checkpoints/best_model.pth`
+ - Copy to `checkpoints/best_model.pth`
 
 ### For Evaluation (Local Machine)
 
 1. **Ensure model is in checkpoints/**:
-   ```
-   checkpoints/
-   └── best_model.pth
-   ```
+ ```
+ checkpoints/
+ └── best_model.pth
+ ```
 
 2. **Test evaluation API**:
-   ```bash
-   python evaluate.py --image test_board.jpg
-   ```
+ ```bash
+ python evaluate.py --image test_board.jpg
+ ```
 
 3. **Should see**:
-   ```
-   ✓ Model loaded from checkpoints/best_model.pth
-   Validation accuracy: XX.XX%
-   ```
+ ```
+ ✓ Model loaded from checkpoints/best_model.pth
+ Validation accuracy: XX.XX%
+ ```
 
 ### For Dataset Conversion
 
 1. **Extract your data**:
-   ```powershell
-   Expand-Archive -Path all_games_data.zip -DestinationPath .
-   ```
+ ```powershell
+ Expand-Archive -Path all_games_data.zip -DestinationPath .
+ ```
 
 2. **Convert format**:
-   ```bash
-   python create_compliant_dataset.py --input Data --output compliant_dataset
-   ```
+ ```bash
+ python create_compliant_dataset.py --input Data --output compliant_dataset
+ ```
 
 3. **Verify**:
-   ```bash
-   python create_compliant_dataset.py --output compliant_dataset --verify
-   ```
+ ```bash
+ python create_compliant_dataset.py --output compliant_dataset --verify
+ ```
 
 4. **Upload to drive**:
-   - Upload `compliant_dataset/` to Google Drive
-   - Share link with "Anyone with link can view"
-   - Include link in your report
+ - Upload `compliant_dataset/` to Google Drive
+ - Share link with "Anyone with link can view"
+ - Include link in your report
 
 ### For Web Visualization
 
 1. **Start server**:
-   ```bash
-   python app.py
-   ```
+ ```bash
+ python app.py
+ ```
 
 2. **Open browser**:
-   - Visit http://localhost:5000
+ - Visit http://localhost:5000
 
 3. **Upload board image**:
-   - Drag-drop or click to upload
-   - See prediction + FEN + confidence
+ - Drag-drop or click to upload
+ - See prediction + FEN + confidence
 
 4. **Use for demos**:
-   - Show in presentation
-   - Include screenshots in report
-   - Record video for webpage
+ - Show in presentation
+ - Include screenshots in report
+ - Record video for webpage
 
 ---
 
@@ -206,55 +206,55 @@ python create_compliant_dataset.py --output compliant_dataset --verify
 
 ```
 chessboard-square-classifier/
-├── evaluate.py                 # ⭐ OFFICIAL API (new)
-├── app.py                      # Web app (updated with comments)
+├── evaluate.py # OFFICIAL API (new)
+├── app.py # Web app (updated with comments)
 ├── create_compliant_dataset.py # Dataset converter (new)
-├── changed.ipynb               # Colab training notebook
-├── README.md                   # Complete docs (updated)
-├── SUBMISSION_CHECKLIST.md     # Submission guide (new)
-├── requirements.txt            # All dependencies
+├── changed.ipynb # Colab training notebook
+├── README.md # Complete docs (updated)
+├── SUBMISSION_CHECKLIST.md # Submission guide (new)
+├── requirements.txt # All dependencies
 │
-├── checkpoints/                # For trained models (new)
-│   ├── README.md              # How to get models from Colab
-│   └── .gitignore             # Don't commit large .pth files
+├── checkpoints/ # For trained models (new)
+│ ├── README.md # How to get models from Colab
+│ └── .gitignore # Don't commit large .pth files
 │
-├── src/                        # Core code (unchanged)
-│   ├── model.py
-│   ├── train.py
-│   ├── predict.py
-│   └── dataset.py
+├── src/ # Core code (unchanged)
+│ ├── model.py
+│ ├── train.py
+│ ├── predict.py
+│ └── dataset.py
 │
-├── dataset_tools/              # Utilities (unchanged)
-│   ├── make_dataset.py
-│   ├── extract_squares.py
-│   ├── fen_utils.py
-│   └── eval.py
+├── dataset_tools/ # Utilities (unchanged)
+│ ├── make_dataset.py
+│ ├── extract_squares.py
+│ ├── fen_utils.py
+│ └── eval.py
 │
-├── templates/                  # Web app HTML (unchanged)
-├── static/                     # Web app CSS/JS (unchanged)
+├── templates/ # Web app HTML (unchanged)
+├── static/ # Web app CSS/JS (unchanged)
 │
-├── Data/                       # Your training data
-│   └── game*_per_frame/
+├── Data/ # Your training data
+│ └── game*_per_frame/
 │
-└── compliant_dataset/          # Will be generated
-    ├── images/
-    └── gt.csv
+└── compliant_dataset/ # Will be generated
+ ├── images/
+ └── gt.csv
 ```
 
 ---
 
-## ✅ What Works Right Now
+## What Works Right Now
 
-- ✅ Web app for visualization (http://localhost:5000)
-- ✅ Training notebook for Google Colab
-- ✅ Dataset conversion to compliant format
-- ✅ Official evaluation API (needs trained model)
-- ✅ Complete documentation in README
-- ✅ Submission checklist
+- Web app for visualization (http://localhost:5000)
+- Training notebook for Google Colab
+- Dataset conversion to compliant format
+- Official evaluation API (needs trained model)
+- Complete documentation in README
+- Submission checklist
 
 ---
 
-## ⚠️ What You Still Need to Do
+## What You Still Need to Do
 
 1. **Train the model** in Google Colab (2-3 hours)
 2. **Download trained model** from Colab to `checkpoints/best_model.pth`
@@ -272,8 +272,8 @@ chessboard-square-classifier/
 ```bash
 # Setup environment
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1  # Windows
-source .venv/bin/activate      # Linux/Mac
+.\.venv\Scripts\Activate.ps1 # Windows
+source .venv/bin/activate # Linux/Mac
 pip install -r requirements.txt
 
 # Extract data
@@ -294,7 +294,7 @@ zip -r code.zip src/ dataset_tools/
 
 ---
 
-## 📞 Quick Troubleshooting
+## Quick Troubleshooting
 
 ### "No module named 'X'"
 ```bash
@@ -325,7 +325,7 @@ Expand-Archive -Path all_games_data.zip -DestinationPath .
 
 ---
 
-## 📊 Expected Results
+## Expected Results
 
 After training in Colab (7-fold cross-validation):
 - **Mean test accuracy**: 90-95% (depends on data quality)
@@ -335,22 +335,22 @@ After training in Colab (7-fold cross-validation):
 
 ---
 
-## 🎯 Priorities for Next Steps
+## Priorities for Next Steps
 
 **This Week (by Jan 15)**:
-1. ✅ Train model in Colab
-2. ✅ Download and place trained model
-3. ✅ Test evaluation API works
-4. ✅ Convert dataset to compliant format
+1. Train model in Colab
+2. Download and place trained model
+3. Test evaluation API works
+4. Convert dataset to compliant format
 
 **Next Week (by Jan 20)**:
-5. ✅ Write final report
-6. ✅ Prepare presentation slides
-7. ✅ Practice presentation
+5. Write final report
+6. Prepare presentation slides
+7. Practice presentation
 
 **Final Week (by Jan 24)**:
-8. ✅ Present project (Jan 20-21)
-9. ✅ Final submission
+8. Present project (Jan 20-21)
+9. Final submission
 
 ---
 
@@ -365,4 +365,4 @@ After training in Colab (7-fold cross-validation):
 
 ---
 
-**You're all set! Everything is adapted to course requirements.** 🎓
+**All set. Everything is adapted to course requirements.**

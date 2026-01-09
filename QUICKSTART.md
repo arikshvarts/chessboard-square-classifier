@@ -1,11 +1,11 @@
-# 🚀 Quick Start Guide - Chess Board Classifier
+# Quick Start Guide - Chess Board Classifier
 
-## ✨ What This Project Does
+## What This Project Does
 
 This is a **Chess Board Position Classifier** that uses Deep Learning to:
 - 📸 Detect chess boards in images
-- 🎯 Classify each square (empty or which chess piece)
-- ♟️ Reconstruct the full board position
+- Classify each square (empty or which chess piece)
+- Reconstruct the full board position
 - 🌐 Display results in a beautiful web interface
 
 ---
@@ -27,14 +27,14 @@ python app.py
 ### Step 3: Open Your Browser
 Go to: **http://localhost:5000**
 
-### Step 4: Upload & See Magic! ✨
+### Step 4: Upload & See Magic!
 1. Click "Choose File" or drag & drop a chess board image
 2. Wait a few seconds for analysis
 3. See the detected board position with:
-   - FEN notation
-   - Visual board display
-   - Confidence scores
-   - Interactive square view
+ - FEN notation
+ - Visual board display
+ - Confidence scores
+ - Interactive square view
 
 ---
 
@@ -46,11 +46,11 @@ If you want to train your own model:
 Extract your data and place in `Data/` folder with structure:
 ```
 Data/
-  game1_per_frame/
-    tagged_images/
-    annotations.csv
-  game2_per_frame/
-    ...
+ game1_per_frame/
+ tagged_images/
+ annotations.csv
+ game2_per_frame/
+ ...
 ```
 
 ### Step 2: Open Jupyter Notebook
@@ -69,17 +69,17 @@ The notebook will:
 
 ---
 
-## 📊 What's Inside the Notebook?
+## What's Inside the Notebook?
 
 The **chess (1).ipynb** notebook contains:
 
 1. **Data Preparation** - Creates 7-fold CV splits from your game data
 2. **Model Architecture** - ResNet50 with 13 output classes
 3. **Training Loop** - 8 epochs per fold with:
-   - Adam optimizer
-   - Learning rate scheduling
-   - Gradient clipping
-   - Early stopping
+ - Adam optimizer
+ - Learning rate scheduling
+ - Gradient clipping
+ - Early stopping
 4. **Evaluation** - Test accuracy on held-out game
 5. **Results** - Cross-validation summary with mean ± std accuracy
 
@@ -88,12 +88,12 @@ The **chess (1).ipynb** notebook contains:
 ## 🎨 Making the Web App More Creative
 
 ### Ideas Already Implemented:
-- ✅ Beautiful gradient UI with animations
-- ✅ Drag & drop file upload
-- ✅ Real-time square-by-square visualization
-- ✅ FEN notation display
-- ✅ Confidence scores per square
-- ✅ Responsive design
+- Beautiful gradient UI with animations
+- Drag & drop file upload
+- Real-time square-by-square visualization
+- FEN notation display
+- Confidence scores per square
+- Responsive design
 
 ### Ideas You Can Add:
 
@@ -128,14 +128,14 @@ Then render the position using the FEN!
 
 ## 🐛 Fixed Issues
 
-### ✅ PyTorch Warning Fixed
+### PyTorch Warning Fixed
 - **Problem:** `verbose=True` parameter deprecated in ReduceLROnPlateau
 - **Solution:** Removed verbose parameter from scheduler
 - **Also Fixed:** Changed `pretrained=True` to `weights='IMAGENET1K_V1'`
 
 ---
 
-## 📝 Testing Checklist
+## Testing Checklist
 
 ### Web App Testing:
 - [ ] App starts without errors
@@ -157,9 +157,9 @@ Then render the position using the FEN!
 
 ---
 
-## 🎯 Project Requirements (from PDFs)
+## Project Requirements (from PDFs)
 
-### ✅ What's Completed:
+### What's Completed:
 1. **Data Collection** - 7 chess game videos processed
 2. **Frame Extraction** - Tagged images with FEN annotations
 3. **Square Extraction** - 64 squares per frame
@@ -168,7 +168,7 @@ Then render the position using the FEN!
 6. **Evaluation** - Per-game accuracy testing
 7. **Web Interface** - Interactive demo app
 
-### 📊 Expected Performance:
+### Expected Performance:
 - Target: >95% square accuracy
 - Cross-validation ensures generalization
 - Test on unseen games (held-out fold)
@@ -206,8 +206,8 @@ Then render the position using the FEN!
 # In app.py, add demo images endpoint
 @app.route('/demo/<int:demo_id>')
 def demo_image(demo_id):
-    # Load pre-selected demo images
-    pass
+ # Load pre-selected demo images
+ pass
 ```
 
 ### 2. Add Statistics Panel (10 min)
@@ -232,7 +232,7 @@ While analyzing, show random chess facts!
 **Solution:** `pip install torch torchvision`
 
 ### Issue: "Could not detect chess board"
-**Solution:** 
+**Solution:**
 - Make sure image shows full 8x8 board
 - Check image is not rotated
 - Ensure good contrast between squares
@@ -245,7 +245,7 @@ While analyzing, show random chess facts!
 
 ---
 
-## 📚 Next Steps
+## Next Steps
 
 1. **Test the Web App** - Upload sample chess board images
 2. **Review Notebook** - Understand the training process
@@ -255,30 +255,26 @@ While analyzing, show random chess facts!
 
 ---
 
-## 🎓 Presenting This Project
+## Presenting This Project
 
 ### Demo Flow:
 1. **Introduction** (1 min)
-   - "Chess position recognition using Deep Learning"
-   
+ - "Chess position recognition using Deep Learning"
 2. **Show Web App** (2 min)
-   - Upload image
-   - Show detection process
-   - Explain FEN output
-   
+ - Upload image
+ - Show detection process
+ - Explain FEN output
 3. **Explain Architecture** (2 min)
-   - Show ResNet50 diagram
-   - Explain square extraction
-   - Discuss 13 classes
-   
+ - Show ResNet50 diagram
+ - Explain square extraction
+ - Discuss 13 classes
 4. **Show Results** (2 min)
-   - Display accuracy metrics
-   - Show confusion matrix
-   - Discuss improvements
-   
+ - Display accuracy metrics
+ - Show confusion matrix
+ - Discuss improvements
 5. **Live Q&A** (3 min)
-   - Take questions
-   - Demo edge cases
+ - Take questions
+ - Demo edge cases
 
 ### Key Points to Mention:
 - 7-fold cross-validation for robust evaluation
@@ -298,4 +294,4 @@ Need help? Check:
 - `README.md` - General project overview
 - PDFs in root folder - Project requirements
 
-**Have fun! ♟️✨**
+** **

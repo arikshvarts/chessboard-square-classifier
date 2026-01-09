@@ -18,10 +18,10 @@ files.download('dataset_out/best_model_fold_1.pth')
 
 # Or download all fold models
 for i in range(1, 8):
-    try:
-        files.download(f'dataset_out/best_model_fold_{i}.pth')
-    except:
-        pass
+ try:
+ files.download(f'dataset_out/best_model_fold_{i}.pth')
+ except:
+ pass
 ```
 
 This will download files to your computer's Downloads folder.
@@ -49,7 +49,7 @@ python evaluate.py --image test_image.jpg
 You should see:
 ```
 ✓ Model loaded from checkpoints/best_model.pth
-  Validation accuracy: XX.XX%
+ Validation accuracy: XX.XX%
 ```
 
 ---
@@ -69,10 +69,10 @@ After running this, your models are in Google Drive at:
 ```
 MyDrive/
 └── chess_models/
-    └── dataset_out/
-        ├── best_model_fold_1.pth
-        ├── best_model_fold_2.pth
-        └── ...
+ └── dataset_out/
+ ├── best_model_fold_1.pth
+ ├── best_model_fold_2.pth
+ └── ...
 ```
 
 ### Step 2: Download from Google Drive
@@ -128,11 +128,11 @@ cp dataset_out/best_model_fold_1.pth checkpoints/fold_1/best_model.pth
 After training completes, Colab will show a summary table:
 
 ```
-Fold | Test Game        | Best Val Acc | Test Acc | Best Epoch
+Fold | Test Game | Best Val Acc | Test Acc | Best Epoch
 -----|------------------|--------------|----------|------------
-1    | game2_per_frame  | 94.23%       | 92.45%   | 6
-2    | game4_per_frame  | 93.87%       | 91.23%   | 7
-3    | game5_per_frame  | 95.12%       | 93.78%   | 5  ← BEST
+1 | game2_per_frame | 94.23% | 92.45% | 6
+2 | game4_per_frame | 93.87% | 91.23% | 7
+3 | game5_per_frame | 95.12% | 93.78% | 5 ← BEST
 ...
 ```
 
@@ -152,14 +152,14 @@ After placing models:
 
 ```
 checkpoints/
-├── best_model.pth              # Your best fold (required)
-├── README.md                   # Instructions (already there)
-├── .gitignore                  # Excludes .pth from git
-└── fold_1/                     # (Optional) Individual folds
-    └── best_model.pth
-    fold_2/
-    └── best_model.pth
-    ...
+├── best_model.pth # Your best fold (required)
+├── README.md # Instructions (already there)
+├── .gitignore # Excludes .pth from git
+└── fold_1/ # (Optional) Individual folds
+ └── best_model.pth
+ fold_2/
+ └── best_model.pth
+ ...
 ```
 
 **Minimum required**: Just `checkpoints/best_model.pth`
@@ -172,11 +172,11 @@ Each `.pth` file contains:
 
 ```python
 {
-    'model_state_dict': ...,    # Model weights
-    'optimizer_state_dict': ..., # Optimizer state
-    'epoch': 6,                 # Which epoch
-    'val_acc': 94.23,           # Validation accuracy
-    'fold': 1                   # Which fold
+ 'model_state_dict': ..., # Model weights
+ 'optimizer_state_dict': ..., # Optimizer state
+ 'epoch': 6, # Which epoch
+ 'val_acc': 94.23, # Validation accuracy
+ 'fold': 1 # Which fold
 }
 ```
 
@@ -203,7 +203,7 @@ Range: [0, 255]
 
 Loading checkpoint: checkpoints/best_model.pth
 ✓ Model loaded from checkpoints/best_model.pth
-  Validation accuracy: 94.23%
+ Validation accuracy: 94.23%
 
 ==============================================================
 PREDICTION RESULT
@@ -215,7 +215,7 @@ Output device: cpu
 Value range: [0, 12]
 
 Visualization:
-  a b c d e f g h
+ a b c d e f g h
 8 ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 8
 7 ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 7
 6 · · · · · · · · 6
@@ -224,10 +224,10 @@ Visualization:
 3 · · · · · · · · 3
 2 ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 2
 1 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 1
-  a b c d e f g h
+ a b c d e f g h
 
 FEN notation:
-  rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
 
 ==============================================================
 ✓ Test complete - function signature is compliant
@@ -272,10 +272,10 @@ ls -lh checkpoints/best_model.pth
 1. Check popup blocker (allow popups from colab.research.google.com)
 2. Try Method 2 (Google Drive)
 3. Try smaller batch:
-   ```python
-   # Download one at a time
-   files.download('dataset_out/best_model_fold_1.pth')
-   ```
+ ```python
+ # Download one at a time
+ files.download('dataset_out/best_model_fold_1.pth')
+ ```
 
 ---
 
@@ -311,19 +311,19 @@ If you have access to university shared drive (up to 2TB):
 **Simplest workflow**:
 
 1. **In Colab** (after training):
-   ```python
-   files.download('dataset_out/best_model_fold_3.pth')
-   ```
+ ```python
+ files.download('dataset_out/best_model_fold_3.pth')
+ ```
 
 2. **On local machine**:
-   ```bash
-   cp ~/Downloads/best_model_fold_3.pth checkpoints/best_model.pth
-   ```
+ ```bash
+ cp ~/Downloads/best_model_fold_3.pth checkpoints/best_model.pth
+ ```
 
 3. **Test**:
-   ```bash
-   python evaluate.py --image test.jpg
-   ```
+ ```bash
+ python evaluate.py --image test.jpg
+ ```
 
 4. **Done!** ✓
 

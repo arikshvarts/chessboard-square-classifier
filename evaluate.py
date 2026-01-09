@@ -233,9 +233,11 @@ def predict_board(image: np.ndarray) -> torch.Tensor:
                     # Unknown class from model -> OOD
                     spec_class = 13
                 
-                # Low confidence -> treat as OOD (optional, can adjust threshold)
-                if confidence_val < 0.3:
-                    spec_class = 13
+                # Note: Low confidence threshold disabled by default
+                # The spec doesn't require confidence filtering - model should be confident
+                # Uncomment below if you want to mark low-confidence predictions as OOD:
+                # if confidence_val < 0.3:
+                #     spec_class = 13
                 
                 # Place in board tensor
                 row = square_idx // 8

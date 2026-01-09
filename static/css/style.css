@@ -21,6 +21,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
@@ -43,7 +44,9 @@ body {
 .header h1 {
     font-size: 3rem;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
 .header .subtitle {
@@ -53,12 +56,14 @@ body {
 
 /* Cards */
 .card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 30px;
     box-shadow: var(--shadow-lg);
     margin-bottom: 30px;
     animation: fadeInUp 0.6s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Main Content */
@@ -174,8 +179,10 @@ body {
 }
 
 .chess-square:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     z-index: 10;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
 .chess-square.light {
@@ -437,7 +444,74 @@ body {
         flex-direction: column;
     }
     
-    .btn {
+    .tech-stack {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* Project Badge */
+.project-badge {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-lg);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    z-index: 1000;
+    animation: slideInRight 0.6s ease;
+}
+
+.project-badge i {
+    color: var(--secondary-color);
+    margin-right: 5px;
+}
+
+/* Tech Stack Badges */
+.tech-stack {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.tech-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.tech-badge i {
+    margin-right: 5px;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}    .btn {
         width: 100%;
         justify-content: center;
     }

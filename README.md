@@ -2,8 +2,8 @@
 
 **Deep Learning course project for chess board position recognition from images.**
 
-**Team**: Ariel Shvarts, Nikol Koifman  
-**Course**: Intro to Deep Learning (Fall 2025)  
+**Team**: Ariel Shvarts, Nikol Koifman
+**Course**: Intro to Deep Learning (Fall 2025)
 **Project**: Chessboard Square Classification and Board-State Reconstruction
 
 ![Sample debug grid](docs/assets/sample_debug_grid.png)
@@ -31,11 +31,11 @@ This project implements a chess board position classifier that:
 4. Provides evaluation API compliant with course specifications
 
 **Key Features:**
-- ✅ 7-fold cross-validation training (train on 6 games, test on 1)
-- ✅ ResNet50 CNN architecture with pretrained ImageNet weights
-- ✅ Web interface for interactive visualization
-- ✅ Official evaluation API: `predict_board(image: np.ndarray) -> torch.Tensor`
-- ✅ Compliant dataset format for submission
+- 7-fold cross-validation training (train on 6 games, test on 1)
+- ResNet50 CNN architecture with pretrained ImageNet weights
+- Web interface for interactive visualization
+- Official evaluation API: `predict_board(image: np.ndarray) -> torch.Tensor`
+- Compliant dataset format for submission
 
 ---
 
@@ -43,45 +43,49 @@ This project implements a chess board position classifier that:
 
 ```
 chessboard-square-classifier/
-├── src/                        # Core model code
-│   ├── model.py               # ChessSquareClassifier (ResNet50)
-│   ├── train.py               # Training script
-│   ├── predict.py             # Prediction utilities
-│   └── dataset.py             # PyTorch Dataset classes
+├── src/ # Core model code
+│ ├── model.py # ChessSquareClassifier (ResNet50)
+│ ├── train.py # Training script
+│ ├── predict.py # Prediction utilities
+│ └── dataset.py # PyTorch Dataset classes
 │
-├── dataset_tools/             # Dataset processing utilities
-│   ├── make_dataset.py        # Dataset manifest generator
-│   ├── extract_squares.py     # Board detection & square extraction
-│   ├── fen_utils.py           # FEN notation utilities
-│   └── eval.py                # Evaluation metrics
+├── dataset_tools/ # Dataset processing utilities
+│ ├── make_dataset.py # Dataset manifest generator
+│ ├── extract_squares.py # Board detection & square extraction
+│ ├── fen_utils.py # FEN notation utilities
+│ └── eval.py # Evaluation metrics
 │
-├── Data/                      # Raw training data (not in git)
-│   ├── game2_per_frame/
-│   ├── game4_per_frame/
-│   └── ...
+├── Data/ # Raw training data (not in git)
+│ ├── game2_per_frame/
+│ ├── game4_per_frame/
+│ └── ...
 │
-├── compliant_dataset/         # Converted dataset (generated)
-│   ├── images/                # All board images
-│   └── gt.csv                 # Ground truth (image_name, FEN, view)
+├── compliant_dataset/ # Converted dataset (generated)
+│ ├── images/ # All board images
+│ └── gt.csv # Ground truth (image_name, FEN, view)
 │
-├── checkpoints/               # Trained models (download from Colab)
-│   ├── best_model.pth         # Best model for evaluation
-│   └── fold_*/                # Individual fold models
+├── checkpoints/ # Trained models (download from Colab)
+│ ├── best_model.pth # REQUIRED: Best model for evaluation
+│ └── fold_*/ # Individual fold models
 │
-├── templates/                 # Web app HTML
-├── static/                    # Web app CSS/JS
+├── templates/ # Web app HTML
+├── static/ # Web app CSS/JS
 │
-├── evaluate.py                # ⭐ OFFICIAL EVALUATION API
-├── app.py                     # Flask web application
+├── evaluate.py # OFFICIAL EVALUATION API
+├── app.py # Flask web application
 ├── create_compliant_dataset.py # Dataset format converter
-├── changed.ipynb              # Google Colab training notebook
-├── requirements.txt           # Python dependencies
-└── README.md                  # This file
+├── changed.ipynb # Google Colab training notebook
+├── requirements.txt # Python dependencies
+└── README.md # This file
 ```
 
 ---
 
 ## Quick Start
+
+**For Evaluators**: Jump to [Evaluation API](#evaluation-api) section.
+
+**For Students/Development**:
 
 ### 1. Environment Setup
 
@@ -115,8 +119,8 @@ Your structure should look like:
 ```
 Data/
 ├── game2_per_frame/
-│   ├── tagged_images/
-│   └── game2.csv
+│ ├── tagged_images/
+│ └── game2.csv
 ├── game4_per_frame/
 └── ...
 ```
@@ -137,16 +141,20 @@ After training in Colab (see next section), download models to `checkpoints/`:
 
 ```
 checkpoints/
-└── best_model.pth    # Place your best model here
+└── best_model.pth # Place your best model here
 ```
 
 See [checkpoints/README.md](checkpoints/README.md) for detailed instructions.
 
 ---
 
-## Training (Google Colab)
+## Training (For Students Only - Not Required for Evaluation)
 
-Training is done in Google Colab for GPU access. Use the provided notebook:
+**Note for Evaluators**: You do NOT need to train the model. Skip to [Evaluation API](#evaluation-api) section. The trained model will be provided.
+
+---
+
+**For Students**: Training is done in Google Colab for GPU access. Use the provided notebook:
 
 ### Step 1: Open Notebook in Colab
 
@@ -205,31 +213,33 @@ Copy the best model to `checkpoints/best_model.pth` on your local machine.
 
 ## Evaluation API
 
+** FOR EVALUATORS - START HERE **
+
+This section describes the official evaluation function required for grading.
+
 ### Official Function Signature
 
 ```python
 def predict_board(image: np.ndarray) -> torch.Tensor:
-    """
-    Predict chessboard state from RGB image.
-    
-    Args:
-        image: numpy.ndarray, shape (H, W, 3), RGB, uint8, [0-255]
-        
-    Returns:
-        torch.Tensor, shape (8, 8), dtype torch.int64, device CPU
-        Values: 0-11 (pieces), 12 (empty), 13 (OOD/unknown)
-    """
+ """
+ Predict chessboard state from RGB image.
+ Args:
+ image: numpy.ndarray, shape (H, W, 3), RGB, uint8, [0-255]
+ Returns:
+ torch.Tensor, shape (8, 8), dtype torch.int64, device CPU
+ Values: 0-11 (pieces), 12 (empty), 13 (OOD/unknown)
+ """
 ```
 
 ### Class Encoding (Official Spec)
 
 ```
-0: White Pawn    | 6: Black Pawn
-1: White Rook    | 7: Black Rook
-2: White Knight  | 8: Black Knight
-3: White Bishop  | 9: Black Bishop
-4: White Queen   | 10: Black Queen
-5: White King    | 11: Black King
+0: White Pawn | 6: Black Pawn
+1: White Rook | 7: Black Rook
+2: White Knight | 8: Black Knight
+3: White Bishop | 9: Black Bishop
+4: White Queen | 10: Black Queen
+5: White King | 11: Black King
 12: Empty Square
 13: Out-of-Distribution / Unknown
 ```
@@ -245,12 +255,12 @@ from PIL import Image
 image = np.array(Image.open('chessboard.jpg').convert('RGB'))
 
 # Get prediction
-board_tensor = predict_board(image)  # Shape: (8, 8)
+board_tensor = predict_board(image) # Shape: (8, 8)
 
 print(board_tensor)
 # tensor([[7, 8, 9, 10, 11, ...],
-#         [6, 6, 6, 6, 6, ...],
-#         ...])
+# [6, 6, 6, 6, 6, ...],
+# ...])
 ```
 
 ### Test Evaluation API
@@ -280,9 +290,9 @@ Access at: **http://localhost:5000**
 ### Features
 
 - 📤 Drag-and-drop image upload
-- ♟️ Visual chess board display
-- 📊 Confidence scores per square
-- 📋 FEN notation output
+- Visual chess board display
+- Confidence scores per square
+- FEN notation output
 - 📈 Prediction statistics
 
 ### Screenshot
@@ -303,10 +313,10 @@ The web app shows:
 ```
 Data/
 ├── game2_per_frame/
-│   ├── tagged_images/
-│   │   ├── frame_000001.jpg
-│   │   └── ...
-│   └── game2.csv (columns: from_frame, fen)
+│ ├── tagged_images/
+│ │ ├── frame_000001.jpg
+│ │ └── ...
+│ └── game2.csv (columns: from_frame, fen)
 └── ...
 ```
 
@@ -315,9 +325,9 @@ Data/
 ```
 compliant_dataset/
 ├── images/
-│   ├── frame_000001.jpg
-│   ├── frame_000002.jpg
-│   └── ...
+│ ├── frame_000001.jpg
+│ ├── frame_000002.jpg
+│ └── ...
 └── gt.csv
 ```
 

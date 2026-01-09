@@ -1,6 +1,6 @@
-# ♟️ Chess Board Position Classifier - Web App
+# Chess Board Position Classifier - Web App
 
-## 🎯 Quick Start Guide
+## Quick Start Guide
 
 ### Prerequisites
 - Python 3.8+
@@ -30,10 +30,10 @@ python app.py
 Navigate to: `http://localhost:5000`
 
 3. **Use the app:**
-   - Click "Choose File" or drag & drop a chess board image
-   - Wait for the AI to analyze the position
-   - View the predicted board state, FEN notation, and confidence scores
-   - Download results or start a new analysis
+ - Click "Choose File" or drag & drop a chess board image
+ - Wait for the AI to analyze the position
+ - View the predicted board state, FEN notation, and confidence scores
+ - Download results or start a new analysis
 
 ### 🎨 Features
 
@@ -44,25 +44,25 @@ Navigate to: `http://localhost:5000`
 - **Confidence Analysis**: See how confident the model is for each square
 - **Export Results**: Download predictions as JSON
 
-### 📁 Project Structure
+### Project Structure
 
 ```
 chessboard-square-classifier/
-├── app.py                      # Flask web application
+├── app.py # Flask web application
 ├── templates/
-│   └── index.html             # Main web interface
+│ └── index.html # Main web interface
 ├── static/
-│   ├── css/
-│   │   └── style.css          # Styles and animations
-│   └── js/
-│       └── app.js             # Frontend logic
-├── src/                       # Model and training code
-│   ├── model.py
-│   ├── train.py
-│   ├── predict.py
-│   └── dataset.py
-├── dataset_tools/             # Data processing utilities
-└── checkpoints/               # Trained model weights (create this folder)
+│ ├── css/
+│ │ └── style.css # Styles and animations
+│ └── js/
+│ └── app.js # Frontend logic
+├── src/ # Model and training code
+│ ├── model.py
+│ ├── train.py
+│ ├── predict.py
+│ └── dataset.py
+├── dataset_tools/ # Data processing utilities
+└── checkpoints/ # Trained model weights (create this folder)
 ```
 
 ### 🔧 Configuration
@@ -79,28 +79,28 @@ chessboard-square-classifier/
 ### 💡 Tips for Best Results
 
 1. **Image Quality:**
-   - Use well-lit, clear images
-   - Ensure the entire board is visible
-   - Avoid shadows or glare
+ - Use well-lit, clear images
+ - Ensure the entire board is visible
+ - Avoid shadows or glare
 
 2. **Board Detection:**
-   - Square or slightly angled views work best
-   - Standard chess board with clear square boundaries
-   - Contrasting light/dark squares
+ - Square or slightly angled views work best
+ - Standard chess board with clear square boundaries
+ - Contrasting light/dark squares
 
 3. **Piece Recognition:**
-   - Clear piece designs (not too stylized)
-   - Good contrast between pieces and board
-   - Pieces centered in their squares
+ - Clear piece designs (not too stylized)
+ - Good contrast between pieces and board
+ - Pieces centered in their squares
 
-### 🎓 Project Context
+### Project Context
 
 This is a Deep Learning project for automatic chess board position recognition:
 - **Course**: Intro to Deep Learning (Fall 2025)
 - **Team**: Ariel Shvarts & Nikol Koifman
 - **Goal**: Classify each square of a chess board and reconstruct the position
 
-### 📊 Model Details
+### Model Details
 
 - **Architecture**: ResNet50 (pre-trained on ImageNet)
 - **Classes**: 13 (empty + 6 white pieces + 6 black pieces)
@@ -131,7 +131,7 @@ pip install -r requirements.txt --upgrade
 - Ensure the full board is visible
 - Check that the image shows a standard 8x8 chess board
 
-### 🚀 Advanced Usage
+### Advanced Usage
 
 **Custom Model:**
 ```python
@@ -150,7 +150,7 @@ curl -X POST -F "file=@board.jpg" http://localhost:5000/predict
 curl http://localhost:5000/health
 ```
 
-### 📝 Future Enhancements
+### Future Enhancements
 
 - [ ] Real-time webcam analysis
 - [ ] Move suggestion based on detected position
@@ -164,6 +164,6 @@ Educational project for academic purposes.
 
 ---
 
-**Enjoy using the Chess Board Position Classifier! ♟️**
+**Enjoy using the Chess Board Position Classifier! **
 
 For questions or issues, please contact the development team.
