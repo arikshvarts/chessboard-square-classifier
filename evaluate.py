@@ -137,11 +137,27 @@ def _initialize_model():
         if os.path.exists(ckpt_path):
             try:
                 print(f"Loading checkpoint: {ckpt_path}")
-                checkpoint = torch.load(ckpt_path, map_location=_DEVICE)
-                _MODEL = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
-                _MODEL.load_state_dict(checkpoint['model_state_dict'])
-                _MODEL.to(_DEVICE)
-                _MODEL.eval()
+                checkpoint = torch.load(ckpt_path, map_location=_DEVICE, weights_only=False)
+                
+                # Check if checkpoint is from Colab training or local training
+                state_dict = checkpoint['model_state_dict']
+                if 'backbone.conv1.weight' not in state_dict and 'conv1.weight' in state_dict:
+                    # Colab checkpoint - load directly into ResNet50
+                    print("  Format: Colab (direct ResNet50)")
+                    from torchvision import models
+                    _MODEL = models.resnet50(weights=None)
+                    _MODEL.fc = nn.Linear(_MODEL.fc.in_features, 13)
+                    _MODEL.load_state_dict(state_dict)
+                    _MODEL.to(_DEVICE)
+                    _MODEL.eval()
+                else:
+                    # Local checkpoint - use ChessSquareClassifier wrapper
+                    print("  Format: Local (ChessSquareClassifier)")
+                    _MODEL = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
+                    _MODEL.load_state_dict(state_dict)
+                    _MODEL.to(_DEVICE)
+                    _MODEL.eval()
+                
                 checkpoint_loaded = True
                 print(f"✓ Model loaded from {ckpt_path}")
                 if 'val_acc' in checkpoint:

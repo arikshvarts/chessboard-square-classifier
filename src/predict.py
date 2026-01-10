@@ -23,9 +23,24 @@ def load_model(checkpoint_path, device='cpu'):
     if not os.path.exists(checkpoint_path):
         raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
     
-    checkpoint = torch.load(checkpoint_path, map_location=device)
-    model = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
-    model.load_state_dict(checkpoint['model_state_dict'])
+    checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    
+    # Check if checkpoint is from Colab training or local training
+    state_dict = checkpoint['model_state_dict']
+    if 'backbone.conv1.weight' not in state_dict and 'conv1.weight' in state_dict:
+        # Colab checkpoint - load directly into ResNet50
+        print("Detected Colab checkpoint format")
+        from torchvision import models
+        import torch.nn as nn
+        model = models.resnet50(weights=None)
+        model.fc = nn.Linear(model.fc.in_features, 13)
+        model.load_state_dict(state_dict)
+    else:
+        # Local checkpoint - use ChessSquareClassifier wrapper
+        print("Detected local checkpoint format")
+        model = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
+        model.load_state_dict(state_dict)
+    
     model.to(device)
     model.eval()
     

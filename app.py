@@ -75,11 +75,27 @@ def initialize_model():
     
     if checkpoint_path and os.path.exists(checkpoint_path):
         print(f"Loading model from: {checkpoint_path}")
-        checkpoint = torch.load(checkpoint_path, map_location=DEVICE)
-        MODEL = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
-        MODEL.load_state_dict(checkpoint['model_state_dict'])
-        MODEL.to(DEVICE)
-        MODEL.eval()
+        checkpoint = torch.load(checkpoint_path, map_location=DEVICE, weights_only=False)
+        
+        # Check if checkpoint is from Colab training (direct ResNet50) or local training (ChessSquareClassifier wrapper)
+        state_dict = checkpoint['model_state_dict']
+        if 'backbone.conv1.weight' not in state_dict and 'conv1.weight' in state_dict:
+            # Colab checkpoint - load directly into ResNet50
+            print("Detected Colab checkpoint format (direct ResNet50)")
+            from torchvision import models
+            MODEL = models.resnet50(weights=None)
+            MODEL.fc = torch.nn.Linear(MODEL.fc.in_features, 13)
+            MODEL.load_state_dict(state_dict)
+            MODEL.to(DEVICE)
+            MODEL.eval()
+        else:
+            # Local checkpoint - use ChessSquareClassifier wrapper
+            print("Detected local checkpoint format (ChessSquareClassifier)")
+            MODEL = ChessSquareClassifier(num_classes=13, pretrained=False, model_name='resnet50')
+            MODEL.load_state_dict(state_dict)
+            MODEL.to(DEVICE)
+            MODEL.eval()
+        
         print(f"Model loaded successfully! Val Acc: {checkpoint.get('val_acc', 'N/A')}")
     else:
         print("No checkpoint found. Model will be initialized without pre-trained weights.")
