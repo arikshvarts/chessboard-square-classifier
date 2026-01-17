@@ -4,12 +4,13 @@ Data/
 dataset_out/
 compliant_dataset/
 outputs/
+results/
+
+# zip files
 *.zip
 
-# models (too large for git)
-checkpoints/*.pth
-checkpoints/*.pt
-checkpoints/*/*.pth
+# PDF documentation (keep only in Drive, not in git)
+*.pdf
 
 # python
 __pycache__/

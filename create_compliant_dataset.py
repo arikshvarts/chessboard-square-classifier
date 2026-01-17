@@ -28,16 +28,11 @@ import argparse
 
 def determine_view_from_game(game_id):
     """
-    Determine camera view based on game ID or metadata.
-    You should adjust this based on your actual data.
+    Determine camera view based on game ID.
     
     Returns:
         'white_bottom' or 'black_bottom'
     """
-    # Default assumption: white pieces are closer to camera
-    # Adjust this mapping based on your actual game recordings
-    
-    # Example mapping (update based on your games):
     white_bottom_games = ['game2_per_frame', 'game4_per_frame', 'game6_per_frame']
     black_bottom_games = ['game5_per_frame', 'game7_per_frame']
     

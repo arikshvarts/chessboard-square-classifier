@@ -47,7 +47,7 @@ Board Coordinate Convention:
 import numpy as np
 import torch
 import torch.nn.functional as F
-from PIL import Image
+from PIL import Image, ImageDraw
 from torchvision import transforms
 import os
 import sys
@@ -332,6 +332,48 @@ def print_board(board_tensor: torch.Tensor):
     print("  a b c d e f g h\n")
 
 
+def save_board_visualization(image: np.ndarray, board_tensor: torch.Tensor, output_path: str = './results/prediction.png'):
+    """
+    Save visualization of predicted board with OOD squares marked with red X.
+    Required by instructor for Project 1.
+    
+    Args:
+        image: Original input image (H, W, 3) RGB numpy array
+        board_tensor: Predicted board tensor (8, 8)
+        output_path: Where to save the output image
+    """
+    # Create results directory if it doesn't exist
+    os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else './results', exist_ok=True)
+    
+    # Convert to PIL image
+    pil_img = Image.fromarray(image, mode='RGB')
+    draw = ImageDraw.Draw(pil_img)
+    
+    # Get image dimensions
+    w, h = pil_img.size
+    sq_w = w // 8
+    sq_h = h // 8
+    
+    # Draw red X on OOD squares (value 13)
+    for row in range(8):
+        for col in range(8):
+            if board_tensor[row, col].item() == 13:  # OOD square
+                # Calculate square boundaries
+                left = col * sq_w
+                upper = row * sq_h
+                right = (col + 1) * sq_w
+                lower = (row + 1) * sq_h
+                
+                # Draw red X
+                line_width = max(3, min(sq_w, sq_h) // 20)
+                draw.line([(left, upper), (right, lower)], fill='red', width=line_width)
+                draw.line([(right, upper), (left, lower)], fill='red', width=line_width)
+    
+    # Save
+    pil_img.save(output_path)
+    print(f"Saved visualization to: {output_path}")
+
+
 # ============================================================================
 # TESTING
 # ============================================================================
@@ -342,6 +384,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Test official predict_board() function')
     parser.add_argument('--image', type=str, required=True, help='Path to chess board image')
     parser.add_argument('--show-tensor', action='store_true', help='Show raw tensor values')
+    parser.add_argument('--save-viz', action='store_true', help='Save visualization with OOD marked (Project 1 requirement)')
+    parser.add_argument('--output', type=str, default='./results/prediction.png', help='Output path for visualization')
     args = parser.parse_args()
     
     # Load image as numpy array
@@ -378,6 +422,13 @@ if __name__ == '__main__':
     print("FEN notation:")
     fen = spec_tensor_to_fen(result)
     print(f"  {fen}")
+    
+    # Save visualization if requested
+    if args.save_viz:
+        print("\n" + "="*60)
+        print("SAVING VISUALIZATION (Project 1 Requirement)")
+        print("="*60)
+        save_board_visualization(image_np, result, args.output)
     
     print("\n" + "="*60)
     print("✓ Test complete - function signature is compliant")
