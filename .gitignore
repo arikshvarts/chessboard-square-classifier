@@ -12,6 +12,9 @@ results/
 # PDF documentation (keep only in Drive, not in git)
 *.pdf
 
+# model weights (too large - share via Drive)
+# Note: best_model.pth and best_model_fold_1.pth are in checkpoints/ but ignored
+
 # python
 __pycache__/
 *.pyc
