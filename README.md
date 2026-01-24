@@ -2,9 +2,11 @@
 
 **Deep Learning course project for chess board position recognition from images.**
 
-**Team**: Ariel Shvarts, Nikol Koifman
+**Team**: Ariel Shvarts, Nikol Koifman, Yaakov Gerelter
 **Course**: Intro to Deep Learning (Fall 2025)
 **Project**: Chessboard Square Classification and Board-State Reconstruction
+
+**🌐 Live Demo**: https://chessboard-square-classifier-iardjdxpqbydrrvjbyhqoy.streamlit.app/
 
 ![Sample debug grid](docs/assets/sample_debug_grid.png)
 
@@ -14,9 +16,9 @@
 - [Overview](#overview)
 - [Repository Structure](#repository-structure)
 - [Quick Start](#quick-start)
+- [Live Demo](#live-demo)
 - [Training (Google Colab)](#training-google-colab)
 - [Evaluation API](#evaluation-api)
-- [Web Application](#web-application)
 - [Dataset Format](#dataset-format)
 - [Requirements](#requirements)
 
@@ -33,9 +35,10 @@ This project implements a chess board position classifier that:
 **Key Features:**
 - 7-fold cross-validation training (train on 6 games, test on 1)
 - ResNet50 CNN architecture with pretrained ImageNet weights
-- Web interface for interactive visualization
+- Interactive web demo (Streamlit Cloud)
 - Official evaluation API: `predict_board(image: np.ndarray) -> torch.Tensor`
 - Compliant dataset format for submission
+- Auto-download model from Google Drive
 
 ---
 
@@ -68,11 +71,12 @@ chessboard-square-classifier/
 │ ├── best_model.pth # REQUIRED: Best model for evaluation
 │ └── fold_*/ # Individual fold models
 │
-├── templates/ # Web app HTML
-├── static/ # Web app CSS/JS
+├── templates/ # Web app HTML (Streamlit)
+├── static/ # Web app CSS/JS (legacy)
 │
 ├── evaluate.py # OFFICIAL EVALUATION API
-├── app.py # Flask web application
+├── streamlit_app.py # Streamlit web application
+├── app.py # Flask web application (legacy)
 ├── create_compliant_dataset.py # Dataset format converter
 ├── changed.ipynb # Google Colab training notebook
 ├── requirements.txt # Python dependencies
@@ -405,38 +409,32 @@ This will:
 
 ---
 
-## Web Application
+## Live Demo
 
-Interactive web interface for visualizing predictions.
+**🌐 Try it now**: https://chessboard-square-classifier-iardjdxpqbydrrvjbyhqoy.streamlit.app/
 
-### Start Web Server
-
-```bash
-# Make sure you're in the project directory
-cd chessboard-square-classifier
-
-# Start Flask app
-python app.py
-```
-
-Access at: **http://localhost:5000**
+Interactive web application deployed on Streamlit Cloud.
 
 ### Features
 
-- 📤 Drag-and-drop image upload
-- Visual chess board display
+- 📤 Upload chess board images
+- 🎯 Real-time predictions with ResNet50 model
+- Visual board display with piece labels
 - Confidence scores per square
 - FEN notation output
-- 📈 Prediction statistics
+- Automatic model download from Google Drive
 
-### Screenshot
+### Run Locally (Optional)
 
-The web app shows:
-1. Upload area
-2. Detected chess board (8×8 grid)
-3. FEN notation
-4. Confidence analysis
-5. Statistics panel
+```bash
+# Install Streamlit
+pip install streamlit
+
+# Run the app
+streamlit run streamlit_app.py
+```
+
+Access at: **http://localhost:8501**
 
 ---
 
