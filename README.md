@@ -137,11 +137,15 @@ This creates:
 
 ### 4. Download Trained Models
 
-After training in Colab (see next section), download models to `checkpoints/`:
+**Download the trained model from Google Drive:**
+
+🔗 **[Download Model Weights](https://drive.google.com/drive/folders/1NIhXsA4fIA4Ge7ooqqBfdrTkuDlXvCq9?usp=drive_link)**
+
+After downloading, place `best_model.pth` in the `checkpoints/` folder:
 
 ```
 checkpoints/
-└── best_model.pth # Place your best model here
+└── best_model.pth # Place downloaded model here
 ```
 
 See [checkpoints/README.md](checkpoints/README.md) for detailed instructions.
